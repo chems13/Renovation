@@ -12,3 +12,9 @@ img {
 main {
   flex:1;
 }
+
+.carousel-inner img {
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+}

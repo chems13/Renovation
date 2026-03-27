@@ -1,7 +1,14 @@
+import ChantierCard from "../components/Chantier/Chantierliste";
+import ChantierService from "../services/ChantierService";
+
 export default function Chantier() {
+  const chantiers = ChantierService().getAll();
   return (
     <>
-      <h1>Chantier</h1>
+      <section className="container">
+        liste des chantiers
+        <ChantierCard chantiers={chantiers} />
+      </section>
     </>
   );
 }

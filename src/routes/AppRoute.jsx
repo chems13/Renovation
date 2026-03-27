@@ -3,6 +3,7 @@ import Clients from "../page/Clients";
 import Devis from "../page/Devis";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/Layout";
+import Home from "../page/Home";
 
 export default function AppRoute() {
   return (
@@ -10,7 +11,7 @@ export default function AppRoute() {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/" element="" />
+            <Route path="/" element={<Home />} />
             <Route path="/clients" element={<Clients />} />
             <Route path="/chantier" element={<Chantier />} />
             <Route path="/devis" element={<Devis />} />
