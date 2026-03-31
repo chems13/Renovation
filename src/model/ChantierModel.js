@@ -1,4 +1,4 @@
-export class Chantier{
+export default class ChantierModel{
 
     constructor(id_chantier,titre,description,date_debut,date_fin,statut){
         this.id_chantier=id_chantier;

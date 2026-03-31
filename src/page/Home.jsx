@@ -4,7 +4,7 @@ import img3 from "../assets/img3.jpg";
 export default function Home() {
   return (
     <>
-      <section className="">
+      <section className="container">
         <h3 className="bg-light fw-bold m-5 text-center justify-content-center">
           Transformez votre maison en toute sérénité
         </h3>
@@ -17,24 +17,24 @@ export default function Home() {
         {/* Carousel */}
         <div
           id="homeCarousel"
-          className="carousel slide "
+          className="carousel slide rounded-4 "
           data-bs-ride="carousel"
         >
           <div className="carousel-inner rounded-4 overflow-hidden">
             <div className="carousel-item active">
-              <img src={img1} className="d-block w-75" alt="Rénovation 1" />
+              <img src={img1} className="d-block w-100" alt="Rénovation 1" />
             </div>
             <div className="carousel-item">
-              <img src={img2} className="d-block w-75" alt="Rénovation 2" />
+              <img src={img2} className="d-block w-100" alt="Rénovation 2" />
             </div>
             <div className="carousel-item">
-              <img src={img3} className="d-block w-75" alt="Rénovation 3" />
+              <img src={img3} className="d-block w-100" alt="Rénovation 3" />
             </div>
           </div>
 
           {/* Boutons précédent / suivant */}
           <button
-            className="carousel-control-prev"
+            className="carousel-control-prev bg-info"
             type="button"
             data-bs-target="#homeCarousel"
             data-bs-slide="prev"
@@ -42,7 +42,7 @@ export default function Home() {
             <span className="carousel-control-prev-icon"></span>
           </button>
           <button
-            className="carousel-control-next"
+            className="carousel-control-next bg-success"
             type="button"
             data-bs-target="#homeCarousel"
             data-bs-slide="next"
