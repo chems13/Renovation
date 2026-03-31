@@ -1,4 +1,10 @@
-export default function ChantierForm({ formData, setFormData, add }) {
+export default function ChantierForm({
+  formData,
+  setFormData,
+  add,
+  update,
+  editingId,
+}) {
   // Mise à jour des champs
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -12,7 +18,12 @@ export default function ChantierForm({ formData, setFormData, add }) {
   // Soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    add(); // on appelle la fonction add() du parent
+
+    if (editingId) {
+      update();
+    } else {
+      add();
+    }
   };
 
   return (
@@ -88,7 +99,7 @@ export default function ChantierForm({ formData, setFormData, add }) {
 
         {/* Bouton */}
         <button type="submit" className="btn btn-primary w-100">
-          Ajouter le chantier
+          {editingId ? "Modifier le chantier" : "Ajouter le chantier"}
         </button>
       </form>
     </div>

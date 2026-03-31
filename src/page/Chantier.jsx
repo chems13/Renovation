@@ -15,6 +15,9 @@ export default function Chantier() {
     statut: "",
   });
 
+  const [editingId, setEditingId] = useState(null);
+
+  //Ajout
   const add = () => {
     const newChantier = new ChantierModel(
       Date.now(),
@@ -28,6 +31,49 @@ export default function Chantier() {
     ChantierService.add(newChantier);
     setChantiers([...ChantierService.getAll()]);
 
+    resetForm();
+
+    // setFormData({
+    //   titre: "",
+    //   description: "",
+    //   date_debut: "",
+    //   date_fin: "",
+    //   statut: "",
+    // });
+  };
+
+  const onEdit = (id) => {
+    const chantier = ChantierService.getById(id);
+    setFormData({ ...Chantier });
+    setEditingId(id);
+  };
+
+  //update sauvggarder la modification
+  const update = () => {
+    const updateChantier = new ChantierModel(
+      editingId,
+      formData.titre,
+      formData.description,
+      formData.date_debut,
+      formData.date_fin,
+      formData.statut,
+    );
+
+    ChantierService.update(updateChantier);
+    setChantiers([...ChantierService.getAll()]);
+
+    resetForm();
+    setEditingId(null);
+  };
+
+  //Delete
+  const remove = (id) => {
+    ChantierService.remove(id);
+    setChantiers([...ChantierService.getAll()]);
+  };
+
+  //Reset Form
+  const resetForm = () => {
     setFormData({
       titre: "",
       description: "",
@@ -37,18 +83,19 @@ export default function Chantier() {
     });
   };
 
-  const remove = (id) => {
-    ChantierService.remove(id);
-    setChantiers([...ChantierService.getAll()]);
-  };
-
   return (
     <section className="container">
-      <ChantierForm formData={formData} setFormData={setFormData} add={add} />
+      <ChantierForm
+        formData={formData}
+        setFormData={setFormData}
+        add={add}
+        update={update}
+        editingId={editingId}
+      />
 
       <h2>liste des chantiers</h2>
 
-      <ChantierCard chantiers={chantiers} onDelete={remove} />
+      <ChantierCard chantiers={chantiers} onDelete={remove} onEdit={onEdit} />
     </section>
   );
 }

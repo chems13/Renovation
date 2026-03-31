@@ -64,7 +64,9 @@ export default function ClientsForm({ formData, setFormData, add }) {
           onChange={handleChange}
         />
 
-        <button className="btn btn-primary w-100">Ajouter</button>
+        <button type="submit" className="btn btn-primary w-100">
+          Ajouter client
+        </button>
       </form>
     </div>
   );

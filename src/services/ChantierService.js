@@ -30,5 +30,9 @@ class ChantierService{
       this.chantiers[index] = updatedChantier;
     }
   }
+  onEdit(id) {
+    const chantier = this.chantiers.find((c) => c.id_chantier === id);
+    return chantier;
+  }
 }
 export default new ChantierService();

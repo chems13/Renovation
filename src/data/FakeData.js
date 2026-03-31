@@ -1,7 +1,7 @@
 import ChantierModel from "../model/ChantierModel";
 import ClientsModel from "../model/ClientsModel";
 import DevisModel from "../model/DevisModel";
-import CommentaireModel from "../model/CommentaireModel";
+import CommentaireModel from "../model/CommentaireModel ";
 
 // --- CHANTIERS ---
 export const chantiersData = [
