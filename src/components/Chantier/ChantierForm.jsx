@@ -27,7 +27,7 @@ export default function ChantierForm({
   };
 
   return (
-    <div className="card shadow-lg p-4 mb-4">
+    <div className="card shadow-lg p-4 m-4">
       <h3 className="fw-bold mb-3">Créer un chantier</h3>
 
       <form onSubmit={handleSubmit}>

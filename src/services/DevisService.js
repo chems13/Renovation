@@ -26,6 +26,10 @@ class DevisService {
     const devis = this.getById(id);
     if (devis) devis.statut = newStatut;
   }
+  onEdit (id){
+    const devis = this.devis.find((d) => d.id_devis === id);
+    return devis;
+  }
 }
 
 export default new DevisService();

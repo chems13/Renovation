@@ -1,4 +1,10 @@
-export default function DevisForm({ formData, setFormData, add }) {
+export default function DevisForm({
+  formData,
+  setFormData,
+  add,
+  update,
+  editingId,
+}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -10,7 +16,12 @@ export default function DevisForm({ formData, setFormData, add }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    add();
+
+    if (editingId) {
+      update();
+    } else {
+      add();
+    }
   };
 
   return (
@@ -59,6 +70,9 @@ export default function DevisForm({ formData, setFormData, add }) {
         />
 
         <button className="btn btn-primary w-100">Ajouter</button>
+        {editingId && (
+          <button className="btn btn-danger w-100 mt-3">Supprimer</button>
+        )}
       </form>
     </div>
   );

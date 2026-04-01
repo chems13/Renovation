@@ -5,6 +5,8 @@ import ClientsService from "../services/ClientsService";
 import ClientsModel from "../model/ClientsModel";
 
 export default function Clients() {
+  const [clients, setClients] = useState(ClientsService.getAll());
+
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
@@ -13,155 +15,86 @@ export default function Clients() {
     mot_de_passe: "",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const [editingId, setEditingId] = useState(null);
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // ➕ AJOUT
+  const add = () => {
+    const newClient = new ClientsModel(
+      Date.now(),
+      formData.nom,
+      formData.prenom,
+      formData.email,
+      formData.telephone,
+      formData.mot_de_passe,
+    );
+
+    ClientsService.add(newClient);
+    setClients([...ClientsService.getAll()]);
+    resetForm();
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Données envoyées :", formData);
+  // ✏️ EDIT (pré-remplir le formulaire)
+  const onEdit = (id) => {
+    const client = ClientsService.getById(id);
+
+    setFormData({
+      nom: client.nom,
+      prenom: client.prenom,
+      email: client.email,
+      telephone: client.telephone,
+      mot_de_passe: client.mot_de_passe,
+    });
+
+    setEditingId(id);
+  };
+
+  // 💾 UPDATE
+  const update = () => {
+    const updatedClient = new ClientsModel(
+      editingId,
+      formData.nom,
+      formData.prenom,
+      formData.email,
+      formData.telephone,
+      formData.mot_de_passe,
+    );
+
+    ClientsService.update(updatedClient);
+    setClients([...ClientsService.getAll()]);
+    resetForm();
+    setEditingId(null);
+  };
+
+  // 🗑️ DELETE
+  const remove = (id) => {
+    ClientsService.remove(id);
+    setClients([...ClientsService.getAll()]);
+  };
+
+  // 🔄 RESET FORM
+  const resetForm = () => {
+    setFormData({
+      nom: "",
+      prenom: "",
+      email: "",
+      telephone: "",
+      mot_de_passe: "",
+    });
   };
 
   return (
     <div className="container my-5">
-      <h2 className="fw-bold text-center mb-4">Créer un compte client</h2>
+      <ClientsForm
+        formData={formData}
+        setFormData={setFormData}
+        add={add}
+        update={update}
+        editingId={editingId}
+      />
 
-      {/* FORMULAIRE CLIENT */}
-      <div className="card shadow-lg p-4 mb-5">
-        <form onSubmit={handleSubmit}>
-          <div className="row g-3">
-            <div className="col-md-6">
-              <label className="form-label">Nom</label>
-              <input
-                type="text"
-                className="form-control"
-                name="nom"
-                value={formData.nom}
-                onChange={handleChange}
-                placeholder="Votre nom"
-              />
-            </div>
+      <h2 className="fw-bold text-center mb-4">Liste des clients</h2>
 
-            <div className="col-md-6">
-              <label className="form-label">Prénom</label>
-              <input
-                type="text"
-                className="form-control"
-                name="prenom"
-                value={formData.prenom}
-                onChange={handleChange}
-                placeholder="Votre prénom"
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label">E‑mail</label>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="exemple@mail.com"
-              />
-            </div>
-
-            <div className="col-md-6">
-              <label className="form-label">Téléphone</label>
-              <input
-                type="tel"
-                className="form-control"
-                name="telephone"
-                value={formData.telephone}
-                onChange={handleChange}
-                placeholder="06 12 34 56 78"
-              />
-            </div>
-
-            <div className="col-12">
-              <label className="form-label">Mot de passe</label>
-              <input
-                type="password"
-                className="form-control"
-                name="mot_de_passe"
-                value={formData.mot_de_passe}
-                onChange={handleChange}
-                placeholder="Votre mot de passe"
-              />
-            </div>
-
-            <div className="col-12 text-center mt-3">
-              <button type="submit" className="btn btn-primary px-4 py-2">
-                Enregistrer le client
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      {/* DASHBOARD CLIENT */}
-      <h2 className="fw-bold text-center mb-4">Espace Client</h2>
-
-      {/* Informations du client */}
-      <div className="card shadow-sm p-3 mb-4">
-        <h4 className="fw-bold">Mes informations</h4>
-        <p>
-          <strong>Nom :</strong> Dupont
-        </p>
-        <p>
-          <strong>Email :</strong> dupont@mail.com
-        </p>
-        <p>
-          <strong>Téléphone :</strong> 06 12 34 56 78
-        </p>
-      </div>
-
-      {/* Devis */}
-      <div className="card shadow-sm p-3 mb-4">
-        <h4 className="fw-bold mb-3">Mes devis</h4>
-        <div className="list-group">
-          <div className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5 className="mb-1">Devis #2024-001</h5>
-              <p className="mb-1">
-                Statut : <span className="badge bg-warning">En attente</span>
-              </p>
-              <p className="mb-1">Montant : 4 500 €</p>
-            </div>
-            <button className="btn btn-success">Accepter le devis</button>
-          </div>
-        </div>
-      </div>
-
-      {/* Chantiers */}
-      <div className="card shadow-sm p-3 mb-4">
-        <h4 className="fw-bold mb-3">Mes chantiers</h4>
-        <div className="list-group">
-          <div className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5 className="mb-1">Rénovation Salle de Bain</h5>
-              <p className="mb-1">
-                Statut : <span className="badge bg-success">Terminé</span>
-              </p>
-              <div
-                className="progress"
-                style={{ height: "8px", width: "200px" }}
-              >
-                <div
-                  className="progress-bar bg-success"
-                  style={{ width: "100%" }}
-                ></div>
-              </div>
-            </div>
-            <button className="btn btn-primary">Voir le chantier</button>
-          </div>
-        </div>
-      </div>
+      <ClientsCard clients={clients} onDelete={remove} onEdit={onEdit} />
     </div>
   );
 }

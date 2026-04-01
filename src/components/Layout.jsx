@@ -1,29 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import React from "react";
-import logo from "../assets/logo1.jpg";
+import logo from "../assets/logo.png";
 
 export default function Layout({ children }) {
+  const selectedcolorbtn = ({ isActive }) =>
+    `btn text-white ${isActive ? "btn-danger" : "btn-success"} `;
   return (
     <div className="containerLayout">
       {/*header*/}
       <header className="d-flex bg-secondary p-3 justify-content-between align-items-center">
         <Link>
-          <img src={logo} alt="LOGO" className="" />
+          <img src={logo} alt="LOGO" className="" style={{ width: "5%" }} />
         </Link>
 
         <nav className=" d-flex gap-3 ">
-          <Link className="btn btn-success text-white" to="/">
+          <NavLink className={selectedcolorbtn} to="/">
             Home
-          </Link>
-          <Link className="btn btn-success text-white" to="/Clients">
+          </NavLink>
+          <NavLink className={selectedcolorbtn} to="/Clients">
             client
-          </Link>
-          <Link className="btn btn-success text-white" to="/Devis">
+          </NavLink>
+          <NavLink className={selectedcolorbtn} to="/Devis">
             devis
-          </Link>
-          <Link className="btn btn-success text-white" to="/Chantier">
+          </NavLink>
+          <NavLink className={selectedcolorbtn} to="/Chantier">
             chantier
-          </Link>
+          </NavLink>
         </nav>
       </header>
 

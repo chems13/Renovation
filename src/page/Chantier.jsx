@@ -30,27 +30,18 @@ export default function Chantier() {
 
     ChantierService.add(newChantier);
     setChantiers([...ChantierService.getAll()]);
-
     resetForm();
-
-    // setFormData({
-    //   titre: "",
-    //   description: "",
-    //   date_debut: "",
-    //   date_fin: "",
-    //   statut: "",
-    // });
   };
 
   const onEdit = (id) => {
     const chantier = ChantierService.getById(id);
-    setFormData({ ...Chantier });
+    setFormData({ ...chantier });
     setEditingId(id);
   };
 
   //update sauvggarder la modification
   const update = () => {
-    const updateChantier = new ChantierModel(
+    const updatedChantier = new ChantierModel(
       editingId,
       formData.titre,
       formData.description,
@@ -59,7 +50,7 @@ export default function Chantier() {
       formData.statut,
     );
 
-    ChantierService.update(updateChantier);
+    ChantierService.update(updatedChantier);
     setChantiers([...ChantierService.getAll()]);
 
     resetForm();

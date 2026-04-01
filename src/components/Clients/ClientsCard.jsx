@@ -8,6 +8,7 @@ export default function ClientsCard({ clients, onDelete, onEdit }) {
           <th>Prénom</th>
           <th>Email</th>
           <th>Téléphone</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
