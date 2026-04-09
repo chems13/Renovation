@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClientsForm from "../components/Clients/ClientsForm";
 import ClientsCard from "../components/Clients/ClientsCard";
 import ClientsService from "../services/ClientsService";
-import ClientsModel from "../model/ClientsModel";
 
 export default function Clients() {
-  const [clients, setClients] = useState(ClientsService.getAll());
+  const [clients, setClients] = useState([]);
+
+  //charger les clients depuis l'api
+  useEffect(() => {
+    fetchClients();
+  }, []);
+
+  const fetchClients = async () => {
+    const data = await ClientsService.getAll();
+    setClients(data);
+  };
 
   const [formData, setFormData] = useState({
     nom: "",
@@ -18,24 +27,15 @@ export default function Clients() {
   const [editingId, setEditingId] = useState(null);
 
   // ➕ AJOUT
-  const add = () => {
-    const newClient = new ClientsModel(
-      Date.now(),
-      formData.nom,
-      formData.prenom,
-      formData.email,
-      formData.telephone,
-      formData.mot_de_passe,
-    );
-
-    ClientsService.add(newClient);
-    setClients([...ClientsService.getAll()]);
+  const add = async () => {
+    await ClientsService.add(formData);
+    await fetchClients();
     resetForm();
   };
 
-  // ✏️ EDIT (pré-remplir le formulaire)
-  const onEdit = (id) => {
-    const client = ClientsService.getById(id);
+  //✏️edit (pré-remplir le formulaire)
+  const onEdit = async (id) => {
+    const client = await ClientsService.getById(id);
 
     setFormData({
       nom: client.nom,
@@ -49,26 +49,16 @@ export default function Clients() {
   };
 
   // 💾 UPDATE
-  const update = () => {
-    const updatedClient = new ClientsModel(
-      editingId,
-      formData.nom,
-      formData.prenom,
-      formData.email,
-      formData.telephone,
-      formData.mot_de_passe,
-    );
-
-    ClientsService.update(updatedClient);
-    setClients([...ClientsService.getAll()]);
+  const update = async () => {
+    await ClientsService.update(editingId, formData);
+    await fetchClients();
     resetForm();
     setEditingId(null);
   };
-
   // 🗑️ DELETE
-  const remove = (id) => {
-    ClientsService.remove(id);
-    setClients([...ClientsService.getAll()]);
+  const remove = async (id) => {
+    await ClientsService.remove(id);
+    await fetchClients();
   };
 
   // 🔄 RESET FORM

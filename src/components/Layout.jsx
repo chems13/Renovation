@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 
 export default function Layout({ children }) {
   const selectedcolorbtn = ({ isActive }) =>
-    `btn text-white ${isActive ? "btn-danger" : "btn-success"} `;
+    `btn text-white ${isActive ? "btn-primary" : "btn-success"} `;
   return (
     <div className="containerLayout">
       {/*header*/}

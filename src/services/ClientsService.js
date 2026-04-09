@@ -1,34 +1,46 @@
-import { clientsData } from "../data/FakeData";
-import ClientsModel from "../model/ClientsModel";
+import api from "./api";
 
 class ClientsService {
-  constructor() {
-    this.clients = clientsData;
+
+
+  //Get tous les clients
+  async getAll() {
+    const res = await api.get("/client");
+    return res.data;
   }
 
-  getAll() {
-    return this.clients;
+  //Get client by id
+  async getById(id) {
+    const res = await api.get(`/client/${id}`);
+    return res.data;
   }
 
-  getById(id) {
-    return this.clients.find((client) => client.id_client === id);
+  //post creer un client
+  async add(data) {
+    const res = await api.post("/client", data);
+    return res.data;
   }
 
-  add(client) {
-    this.clients.push(client);
+  //put modifier un client
+  async remove(id) {
+    const res =await api.delete(`/client/${id}`);
+    return res.data;
+    
   }
 
-  remove(id) {
-    this.clients = this.clients.filter(
-      (client) => client.id_client !== id
-    );
-  }
-
-  update(updatedClient) {
-    this.clients = this.clients.map((client) =>
-      client.id_client === updatedClient.id_client ? updatedClient : client
-    );
+  //put modifier un client
+  async update(id, data) {
+    const res = await api.put(`/client/${id}`, data);
+    return res.data;
   }
 }
-
 export default new ClientsService();
+
+
+
+
+
+  
+ 
+
+ 
