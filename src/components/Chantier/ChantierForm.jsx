@@ -1,5 +1,6 @@
 export default function ChantierForm({
   formData,
+  clients,
   setFormData,
   add,
   update,
@@ -28,7 +29,9 @@ export default function ChantierForm({
 
   return (
     <div className="card shadow-lg p-4 m-4">
-      <h3 className="fw-bold mb-3">Créer un chantier</h3>
+      <h3 className="fw-bold mb-3">
+        {editingId ? "Modifier un chantier" : "Créer un chantier"}
+      </h3>
 
       <form onSubmit={handleSubmit}>
         {/* Titre */}
@@ -94,6 +97,22 @@ export default function ChantierForm({
             <option value="En attente">En attente</option>
             <option value="En cours">En cours</option>
             <option value="Terminé">Terminé</option>
+          </select>
+        </div>
+
+        <div className="mb-3">
+          <select
+            name="id_client"
+            id=""
+            className="form-select"
+            onChange={handleChange}
+          >
+            <option>Choisir un client....</option>
+            {clients.map((client) => (
+              <option key={client.id_client} value={client.id_client}>
+                {client.nom} {client.prenom}
+              </option>
+            ))}
           </select>
         </div>
 

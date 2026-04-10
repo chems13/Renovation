@@ -1,38 +1,36 @@
-import { chantiersData } from "../data/FakeData";
-import ChantierModel from "../model/ChantierModel";
+import api from "./api";
 
 class ChantierService{
 
-     constructor() {
-        this.chantiers = chantiersData;
-     }
-
-    getAll(){
-        return this.chantiers;
-   }
-
-   getById(id) {
-    return this.chantiers.find((chantier) => chantier.id_chantier === id);
+  //Get tous les chantiers
+  async getAll() {
+    const res = await api.get("/chantier");
+    return res.data;
   }
 
-  remove(id){
-    this.chantiers = this.chantiers.filter(
-      (chantiers) => chantiers.id_chantier !== id);
+  //Get chantier par ID
+  async getById(id){
+    const res = await api.get(`/chantier/${id}`);
+    return res.data;
   }
 
-  add(chantier){
-    this.chantiers.push(chantier);
+  //post cree un chantier
+  async add(data){    
+    const res = await api.post("/chantier", data);
+    return res.data;
   }
 
-  update(updatedChantier) {
-    const index = this.chantiers.findIndex((chantier) => chantier.id_chantier === updatedChantier.id_chantier);
-    if (index !== -1) {
-      this.chantiers[index] = updatedChantier;
-    }
+  //put update un chantier
+  async update(id,data){
+    const res = await api.put(`/chantiet/${id}`,data);
+    return res.data;
   }
-  onEdit(id) {
-    const chantier = this.chantiers.find((c) => c.id_chantier === id);
-    return chantier;
+
+  //Deleteun chantier
+  async remove(id){
+    const res = await api.delete(`/chantier/${id}`);
+    return res.data;
   }
+
 }
 export default new ChantierService();
