@@ -1,33 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CommentaireService from "../services/CommentaireService";
 import CommentaireForm from "../components/Commentaire/CommentaireForm";
 import CommentaireCard from "../components/Commentaire/CommentaireCard";
-import CommentaireModel from "../model/CommentaireModel";
 
 export default function Commentaires() {
-  const [commentaires, setCommentaires] = useState(CommentaireService.getAll());
+  //useState pour stocker les commentaires
+  const [commentaires, setCommentaires] = useState([]);
 
+  //Get tous les commentaires
+  const fetchCommentaires = async () => {
+    const data = await CommentaireService.getAll();
+    setCommentaires(data);
+  };
+  //use Effect pour charger les commentaires
+  useEffect(() => {
+    const load = async () => {
+      const data = await CommentaireService.getAll();
+      setCommentaires(data);
+    };
+    load();
+  }, []);
+
+  //useState pour stocker le formulaire
   const [formData, setFormData] = useState({
     note: "",
-    commentaire: "",
-    date_commentaire: "",
+    contenu: "",
+    date_comment: "",
+    id_client: "",
+    id_chantier: "",
   });
 
-  const add = () => {
-    const newCommentaire = new CommentaireModel(
-      Date.now(),
-      formData.note,
-      formData.commentaire,
-      formData.date_commentaire,
-    );
-
-    CommentaireService.add(newCommentaire);
-    setCommentaires([...CommentaireService.getAll()]);
+  const add = async () => {
+    await CommentaireService.add(formData);
+    await fetchCommentaires();
 
     setFormData({
       note: "",
       commentaire: "",
-      date_commentaire: "",
+      date_comment: "",
+      id_client: "",
+      id_chantier: "",
     });
   };
 

@@ -11,6 +11,8 @@ class ChantierService{
   //Get chantier par ID
   async getById(id){
     const res = await api.get(`/chantier/${id}`);
+    console.log(res.data);
+
     return res.data;
   }
 
@@ -22,7 +24,7 @@ class ChantierService{
 
   //put update un chantier
   async update(id,data){
-    const res = await api.put(`/chantiet/${id}`,data);
+    const res = await api.put(`/chantier/${id}`,data);
     return res.data;
   }
 

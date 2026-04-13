@@ -1,4 +1,4 @@
-import ClientsService from "../../services/ClientsService";
+import Chantier from "../../page/Chantier";
 export default function ClientsCard({ clients, onDelete, onEdit }) {
   return (
     <table className="table table-striped">
@@ -26,7 +26,6 @@ export default function ClientsCard({ clients, onDelete, onEdit }) {
               >
                 Modifier🖊️
               </button>
-
               <button
                 className="btn btn-danger"
                 onClick={() => onDelete(client.id_client)}

@@ -1,30 +1,34 @@
-import {commentairesData } from "../data/FakeData";
-import CommentaireModel from "../model/CommentaireModel ";
+import axios from "axios";
 
-class CommentaireService {
-  constructor() {
-    this.commentaires = commentairesData;
+  const api_url = "http://localhost:4000/commentaires";
+
+
+  class CommentaireService {
+
+//Get tous les commentaires
+  async getAll(){
+    const res = await axios.get(api_url);
+    return res.data;
   }
 
-  getAll() {
-    return this.commentaires;
+
+  //Get commentaire par ID
+  async add(commentaire){
+    const res = await axios.post(api_url, commentaire);
+    return res.data;
   }
 
-  getByChantierId(id_chantier) {
-    return this.commentaires.filter(
-      (c) => c.id_chantier === id_chantier
-    );
+ //supprimer un commentaire
+  async remove(id){
+    await axios.delete(`${api_url}/${id}`);
   }
 
-  add(commentaire) {
-    this.commentaires.push(commentaire);
+  //modifier un commentaire
+  async update(id, commentaire){
+    const res = await axios.put(`${api_url}/${id}`, commentaire);
+    return res.data;
   }
 
-  remove(id) {
-    this.commentaires = this.commentaires.filter(
-      (c) => c.id_commentaire !== id
-    );
-  }
 }
 
 export default new CommentaireService();

@@ -1,6 +1,8 @@
 import ChantierService from "../../services/ChantierService";
+import { useNavigate } from "react-router-dom";
 
 export default function ChantierCard({ chantiers, onDelete, onEdit }) {
+  const navigate = useNavigate();
   return (
     <>
       <table className="table table-striped">
@@ -36,6 +38,13 @@ export default function ChantierCard({ chantiers, onDelete, onEdit }) {
                   onClick={() => onDelete(chantier.id_chantier)}
                 >
                   Supprimer🗑️
+                </button>
+
+                <button
+                  className="btn btn-info me-2"
+                  onClick={() => navigate(`/chantier/${chantier.id_chantier}`)}
+                >
+                  Details chantier
                 </button>
               </td>
             </tr>

@@ -1,4 +1,5 @@
 export default function CommentaireForm({ formData, setFormData, add }) {
+  // Mise a jour des champs
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -33,7 +34,7 @@ export default function CommentaireForm({ formData, setFormData, add }) {
           name="commentaire"
           className="form-control mb-3"
           placeholder="Votre commentaire"
-          value={formData.commentaire}
+          value={formData.contenu}
           onChange={handleChange}
         ></textarea>
 
@@ -41,7 +42,25 @@ export default function CommentaireForm({ formData, setFormData, add }) {
           type="date"
           name="date_commentaire"
           className="form-control mb-3"
-          value={formData.date_commentaire}
+          value={formData.data_comment}
+          onChange={handleChange}
+        />
+
+        <input
+          type="number"
+          name="id_client"
+          className="form-control mb-3"
+          placeholder="ID du client"
+          value={formData.id_client}
+          onChange={handleChange}
+        />
+
+        <input
+          type="number"
+          name="id_chantier"
+          className="form-control mb-3"
+          placeholder="ID du chantier"
+          value={formData.id_chantier}
           onChange={handleChange}
         />
 
