@@ -85,7 +85,7 @@ export default function ClientsForm({
 
         <div className="col-md-4">
           <section className="p-4 mb-4 card">
-            <h3>Nos valeurs</h3>
+            <h3 className="fw-bold">Nos valeurs</h3>
             <p>
               Parce qu’un chantier réussi commence toujours par une vision
               claire, chaque projet que nous lançons est pensé pour garantir
@@ -101,7 +101,7 @@ export default function ClientsForm({
             </p>
             <img
               src={img4}
-              alt="chantier"
+              alt="Chantier"
               className="img-fluid"
               style={{ width: "40% " }}
             />

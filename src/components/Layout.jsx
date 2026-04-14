@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.jpg";
 
 export default function Layout({ children }) {
   const selectedcolorbtn = ({ isActive }) =>

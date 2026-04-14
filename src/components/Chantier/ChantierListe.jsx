@@ -34,7 +34,7 @@ export default function ChantierCard({ chantiers, onDelete, onEdit }) {
                 </button>
 
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger me-2"
                   onClick={() => onDelete(chantier.id_chantier)}
                 >
                   Supprimer🗑️
@@ -44,7 +44,7 @@ export default function ChantierCard({ chantiers, onDelete, onEdit }) {
                   className="btn btn-info me-2"
                   onClick={() => navigate(`/chantier/${chantier.id_chantier}`)}
                 >
-                  Details chantier
+                  Details chantier 👀
                 </button>
               </td>
             </tr>
