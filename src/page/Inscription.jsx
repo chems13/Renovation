@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { inscriptionUser } from "../services/UserService";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Inscription() {
   const [form, setForm] = useState({

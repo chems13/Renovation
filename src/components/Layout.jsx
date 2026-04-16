@@ -14,6 +14,10 @@ export default function Layout({ children }) {
         </Link>
 
         <nav className=" d-flex gap-3 ">
+          <NavLink className={selectedcolorbtn} to="/Inscription">
+            Connextion
+          </NavLink>
+
           <NavLink className={selectedcolorbtn} to="/">
             Home
           </NavLink>
