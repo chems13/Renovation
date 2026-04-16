@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const api_url = "http://localhost:4000/user";
+import api from "./api";
 
 export const inscriptionUser = async (data) => {
     try{
-        const res = await axios.post(`${api_url}/inscription`, data);
+        const res = await api.post(`/user`, data);
         return res.data;
     }catch(error){
         throw error.response.data || error;

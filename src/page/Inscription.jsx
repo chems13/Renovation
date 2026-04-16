@@ -27,15 +27,32 @@ export default function Inscription() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="prenom" placeholder="prenom" onChange={handleChange} />
-      <input name="login" placeholder="login" onChange={handleChange} />
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 border rounded shadow-sm w-50 mx-auto mt-5"
+    >
+      <input
+        name="prenom"
+        placeholder="prenom"
+        className="from-control m-3"
+        onChange={handleChange}
+      />
+
+      <input
+        name="login"
+        placeholder="login"
+        className="from-control m-3"
+        onChange={handleChange}
+      />
+
       <input
         name="mdp"
         type="password"
         placeholder="mot de passe"
+        className="from-control m-3"
         onChange={handleChange}
       />
+
       <button type="submit">S'inscrire</button>
     </form>
   );
