@@ -1,7 +1,7 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import AuthService from "../services/AuthService";
 
-//conteuneur global accessible  depuis n'import ou
+//conteneur global accessible  depuis n'import ou
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -33,4 +33,4 @@ export function AuthProvider({ children }) {
 }
 
 //hook personalisé pour utiliser le contexte
-export const useAuth = () => useContexte(AuthContext);
+export const useAuth = () => useContext(AuthContext);

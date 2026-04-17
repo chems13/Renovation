@@ -1,7 +1,9 @@
-import ChantierService from "../../services/ChantierService";
+import ChantierService from "../../services/ClientsService.js";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 export default function ChantierCard({ chantiers, onDelete, onEdit }) {
+  const { isAdmin } = useAuth();
   const navigate = useNavigate();
   return (
     <>
@@ -26,19 +28,22 @@ export default function ChantierCard({ chantiers, onDelete, onEdit }) {
               <td>{chantier.date_fin}</td>
               <td>{chantier.statut}</td>
               <td>
-                <button
-                  className="btn btn-success me-2"
-                  onClick={() => onEdit(chantier.id_chantier)}
-                >
-                  Modifier🖊️
-                </button>
-
-                <button
-                  className="btn btn-danger me-2"
-                  onClick={() => onDelete(chantier.id_chantier)}
-                >
-                  Supprimer🗑️
-                </button>
+                {isAdmin && (
+                  <>
+                    <button
+                      className="btn btn-warning me-2"
+                      onClick={() => onEdit(chantier.id_chantier)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => onDelete(chantier.id_chantier)}
+                    >
+                      Delete
+                    </button>
+                  </>
+                )}
 
                 <button
                   className="btn btn-info me-2"

@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import ClientsForm from "../components/Clients/ClientsForm";
-import ClientsCard from "../components/Clients/ClientsCard";
-import ClientsService from "../services/ClientsService";
+import ClientsForm from "../components/Clients/ClientsForm.jsx";
+import ClientsCard from "../components/Clients/ClientsCard.jsx";
+import ClientsService from "../services/ClientsService.js";
 
 export default function Clients() {
   const [clients, setClients] = useState([]);
 
   //charger les clients depuis l'api
   useEffect(() => {
-    fetchClients();
+    const load = async () => {
+      const data = await ClientsService.getAll();
+      setClients(data);
+    };
+    load();
   }, []);
 
   const fetchClients = async () => {

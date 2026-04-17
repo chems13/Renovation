@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ChantierCard from "../components/Chantier/ChantierListe";
 import ChantierService from "../services/ChantierService";
-import clientService from "../services/clientsService";
+import clientService from "../services/ClientsService";
 import ChantierForm from "../components/Chantier/ChantierForm";
 
 export default function Chantier() {

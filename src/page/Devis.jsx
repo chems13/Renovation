@@ -36,6 +36,7 @@ export default function Devis() {
 
   return (
     <section className="container">
+      <h2>devis</h2>
       <DevisForm formData={formData} setFormData={setFormData} add={add} />
 
       <h2 className="mt-4">Liste des devis</h2>

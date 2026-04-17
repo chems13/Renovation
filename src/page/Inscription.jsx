@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { inscriptionUser } from "../services/UserService";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Inscription() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     prenom: "",
     login: "",
@@ -20,7 +22,7 @@ export default function Inscription() {
     try {
       const user = await inscriptionUser(form);
       console.log("Utilisateur créé:", user);
-      alert("inscription reussie !");
+      navigate("/login");
     } catch (error) {
       alert(error.msg || "erreur serveur");
     }
